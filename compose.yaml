@@ -1,0 +1,18 @@
+services:
+  web:
+    build: ./
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+
+  db:
+    image: mariadb
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DB_PASSWORD}
+      MARIADB_DATABASE: testdb
+    volumes:
+      - dbdata:/var/lib/mysql
+    restart: unless-stopped
+
+volumes:
+  dbdata:
